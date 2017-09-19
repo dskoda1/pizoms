@@ -23,12 +23,13 @@ def create_user(user_info, app_client):
     return res['id'], res['token']
 
 
-def create_categories(db, user_id, num_to_insert):
+def create_categories(db, num_to_insert, user_id):
     cat_ids = []
     for i in range(num_to_insert):
         c = Category(
             name='category-{}-{}'.format(i, randint(0, 10000)),
-            user_id=user_id
+            description='This category is so delicious! {}'.format(randint(0, 10000)),
+            created_by=user_id
         )
         db.session.add(c)
         db.session.commit()

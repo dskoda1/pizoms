@@ -7,7 +7,7 @@ from flask_testing import TestCase
 from setup import basedir
 from index import app, db
 from application.models import User
-from tests.helpers import create_user
+from t.helpers import create_user
 
 
 class BaseTestConfig(TestCase):
@@ -38,6 +38,7 @@ class BaseTestConfig(TestCase):
         self.kwargs = {
             'headers'
         }
+        self.json_type = 'application/json'
 
     def tearDown(self):
         db.session.remove()

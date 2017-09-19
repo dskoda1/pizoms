@@ -1,14 +1,18 @@
+from datetime import datetime
+
 from index import db, bcrypt
 
 class User(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
+    created_at = db.Column(db.DateTime(), nullable=False)
 
     def __init__(self, email, password):
         self.email = email
         self.active = True
         self.password = User.hashed_password(password)
+        self.created_at = datetime.utcnow()
 
     @staticmethod
     def hashed_password(password):

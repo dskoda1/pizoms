@@ -1,15 +1,11 @@
+from datetime import datetime
+
 from flask import request, jsonify, g
 from application.models import Category
 from index import app, db
 from sqlalchemy.exc import IntegrityError
 from application.utils import Http, requires_auth
 from application.urls import Urls
-
-def cat_helper(cat):
-    return {
-        'name': cat,
-        'id': ++id
-    }
 
 @app.route(Urls.CATEGORIES, methods=[Http.GET])
 def get_categories():
@@ -40,8 +36,8 @@ def create_category():
 def delete_category(category_id):
 
     category = Category.query.filter_by(
-                    id=category_id
-                ).first()
+                id=category_id
+            ).first()
 
     if not category:
         return jsonify(message='Category not found'), 404

@@ -1,3 +1,4 @@
+import datetime
 from index import db
 
 class Item(db.Model):
@@ -9,6 +10,10 @@ class Item(db.Model):
     description = db.Column(db.String(100), nullable=True)
     created_by = db.Column(db.Integer(), db.ForeignKey('user.id'), nullable=False)
     created_at = db.Column(db.DateTime(), nullable=False)
+
+    def __init__(self, *args, **kwargs):
+        db.Model.__init__(self, *args, **kwargs)
+        self.created_at = datetime.datetime.utcnow()
 
     def attr(self):
         return {

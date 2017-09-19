@@ -8,6 +8,10 @@ class Category(db.Model):
     created_by = db.Column(db.Integer(), db.ForeignKey('user.id'), nullable=False)
     created_at = db.Column(db.DateTime(), nullable=False)
 
+    def __init__(self, *args, **kwargs):
+        db.Model.__init__(self, *args, **kwargs)
+        self.created_at = datetime.datetime.utcnow()
+
     def attr(self):
         return {
             'id': self.id,
